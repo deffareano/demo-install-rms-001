@@ -1,0 +1,5 @@
+name: Rekod4Sekolah (dokformalter)
+type: module
+description: 'Rekod4Sekolah Dokumen Form Alter'
+package: Rekod4Sekolah
+core_version_requirement: ^10

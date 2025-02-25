@@ -1,0 +1,255 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Datetime\DrupalDateTime;
+
+function rekod4sekolah_formalter_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+}
+
+### UNIT PENGOLAH ##########
+function rekod4sekolah_formalter_form_node_unit_pengolah_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form);
+    #\Drupal::messenger()->addMessage("Tampilkan unit pengolah disini");
+    if (!isset($_GET['destination'])) {
+        #throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/masterfile/unit-pengolah') {
+            #die($_GET['destination']);
+        #    throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_unit_pengolah_edit_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/masterfile/unit-pengolah') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_unit_pengolah_delete_form_alter(&$form, &$form_state, $form_id) {
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/masterfile/unit-pengolah') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+############################
+### TAHUN PERATURAN ########
+function rekod4sekolah_formalter_form_node_tahun_peraturan_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/tahun-peraturan') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_tahun_peraturan_edit_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/tahun-peraturan') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_tahun_peraturan_delete_form_alter(&$form, &$form_state, $form_id) {
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/tahun-peraturan') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+############################
+### KLASIFIKASI KEAMANAN ###
+function rekod4sekolah_formalter_form_node_klasifikasi_keamanan_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/klasifikasi-keamanan') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_klasifikasi_keamanan_edit_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/klasifikasi-keamanan') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_klasifikasi_keamanan_delete_form_alter(&$form, &$form_state, $form_id) {
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/klasifikasi-keamanan') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+############################
+### FORMAT MEDIA ###########
+function rekod4sekolah_formalter_form_node_format_media_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/format-media') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_format_media_edit_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/format-media') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_format_media_delete_form_alter(&$form, &$form_state, $form_id) {
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/format-media') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+############################
+### HAK AKSES ##############
+function rekod4sekolah_formalter_form_node_hak_akses_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/hak-akses') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_hak_akses_edit_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/hak-akses') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_hak_akses_delete_form_alter(&$form, &$form_state, $form_id) {
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/hak-akses') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+############################
+### NASIB AKHIR ############
+function rekod4sekolah_formalter_form_node_nasib_akhir_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/nasib-akhir') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_nasib_akhir_edit_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/nasib-akhir') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+
+function rekod4sekolah_formalter_form_node_nasib_akhir_delete_form_alter(&$form, &$form_state, $form_id) {
+    if (!isset($_GET['destination'])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    } else {
+        if ($_GET['destination'] != '/rekod4sekolah/masterfile/nasib-akhir') {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    }
+}
+############################
+### BERKAS #################
+function rekod4sekolah_formalter_form_node_berkas_form_alter(&$form, &$form_state, $form_id) {
+#    #dpm($form['field_bks_uraian']['widget'][0]['value']['#default_value']);
+#    #$form['field_bks_uraian']['widget'][0]['value']['#default_value'] = 'uraian disini';
+#    dpm($form['field_bks_tanggal_retensi']['#access']);
+    $form['field_bks_tanggal_retensi']['#access'] = FALSE;
+
+    $form['field_bks_tanggal_retensi']['widget'][0]['value']['#default_value'] = new DrupalDateTime('2025-10-11 01:00:00', 'Asia/Jakarta');
+#    \Drupal::messenger()->addMessage("Tampilkan berkas disini");
+}
+
+function rekod4sekolah_formalter_form_node_berkas_delete_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form);
+    #\Drupal::messenger()->addMessage($form_state->getformObject()->getEntity()->id());
+
+    $query = \Drupal::entityQuery('node');
+    $docs = $query
+    ->accessCheck(TRUE)
+    ->condition('type', 'dokumen_rekod')
+    ->condition('status', 1)
+    ->condition('field_dok_berkas', $form_state->getformObject()->getEntity()->id(), '=')
+    ->sort('created', 'DESC')
+    ->execute();
+    #var_dump($docs);
+    if (count($docs) > 0) {
+        $current_path = \Drupal::service('path.current')->getPath();
+        $current_uri = \Drupal::request()->getRequestUri();
+        $cut_uri = explode("/", $current_uri);
+        #var_dump($cut_uri);
+        unset($cut_uri[0]); unset($cut_uri[4]);
+        #var_dump($cut_uri);
+        $new_uri = implode("/", $cut_uri);
+        $is_http = 'http';
+        if (isset($_SERVER['HTTPS'])) {
+            $is_http = 'https';
+        }
+        $cview_url = $is_http.'://'.$_SERVER['HTTP_HOST'].'/'.$new_uri;
+        \Drupal::messenger()->addMessage("You cannot delete Berkas that still has documents", 'error');
+        #\Drupal::messenger()->addMessage('<a href="#">starman</a>', 'error');
+        throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException("Pesan disini");
+    }
+
+}
+############################

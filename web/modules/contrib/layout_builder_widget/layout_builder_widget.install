@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the layout_builder_widget module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function layout_builder_widget_install() {
+  if (\Drupal::service('config.installer')->isSyncing()) {
+    return;
+  }
+  // By default, Layout Builder module uses a non-translatable
+  // field to store layout overrides, and translation-specific
+  // layouts are not supported. This hook is used to make all existing
+  // layout_section fields translatable during module installation.
+  $field_storage_configs = \Drupal::entityTypeManager()
+    ->getStorage('field_storage_config')
+    ->loadByProperties(['type' => 'layout_section']);
+
+  /** @var \Drupal\field\FieldStorageConfigInterface $field_storage_config */
+  foreach ($field_storage_configs as $field_storage_config) {
+    // layout_builder_widget_field_storage_config_presave() is triggered to
+    // make this field translatable.
+    $field_storage_config->save();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function layout_builder_widget_uninstall() {
+  // If a SectionStorage class is overridden and then the layout_builder
+  // module is uninstalled, tempstore will still refer to the now
+  // non-existent overridden class. To prevent this issue,
+  // all layout_builder tempstore entries must be uninstalled.
+  Drupal::keyValueExpirable('tempstore.shared.layout_builder.section_storage.overrides')
+    ->deleteAll();
+}

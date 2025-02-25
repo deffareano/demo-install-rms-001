@@ -1,0 +1,45 @@
+<?php
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function rekod4sekolah_nodeberkas_node_insert($node) {
+    #\Drupal::messenger()->addMessage("Pesan dari rekod4sekolah_nodeerkas");
+    #dpm($node);
+}
+
+function rekod4sekolah_nodeberkas_node_presave($node) {
+    #\Drupal::messenger()->addMessage('Node Type: '.$node->getType());
+    if (($node->getType() == 'berkas') AND ($node->isNew())) {
+
+        $kurun_waktu = $node->get("field_bks_kurun_waktu")->getString();
+        #\Drupal::messenger()->addMessage('Kurun Waktu: '.$kurun_waktu);
+        #\Drupal::messenger()->addMessage('Kode Klasifikasi: '.$node->get("field_bks_kode_klasifikasi")->getString());
+        $klasifikasi_id = $node->get("field_bks_kode_klasifikasi")->getString();
+        $klasifikasi_node = $node->load($klasifikasi_id);
+        #\Drupal::messenger()->addMessage('retensi Aktif: '.$klasifikasi_node->get("field_kla_retensi_aktif")->getString());
+        #\Drupal::messenger()->addMessage('retensi Inaktif: '.$klasifikasi_node->get("field_kla_retensi_inaktif")->getString());
+        $total_tahun = $klasifikasi_node->get("field_kla_retensi_aktif")->getString() + $klasifikasi_node->get("field_kla_retensi_inaktif")->getString();
+        #\Drupal::messenger()->addMessage('Total Tahun: '.$total_tahun);
+
+        $tanggal_retensi = date_create($kurun_waktu);
+        $interval = date_interval_create_from_date_string($total_tahun.' years');
+        $tanggal_retensi->add($interval);
+        $node->set('field_bks_tanggal_retensi', $tanggal_retensi->format('Y-m-d')); // You need to save the $order_node 
+    }
+}
+
+
+function rekod4sekolah_nodeberkas_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+#    $variables['#cache']['max-age'] = 0;
+#    \Drupal::service('page_cache_kill_switch')->trigger(); # Drupal clear cache
+    $allowed_bundles = array ("berkas");
+    #\Drupal::messenger()->addMessage('rekod4sekolah_nodeberkas_entity_view');
+    if (in_array($entity->bundle(), $allowed_bundles)) {
+        $title = $build['title'][0]['#context']['value'];
+        $new_title = t('Informasi Berkas dan Dokumen', ['@title' => $title]);
+        $build['title'][0]['#context']['value'] = $new_title;
+    }
+}

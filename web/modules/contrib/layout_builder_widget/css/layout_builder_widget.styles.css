@@ -1,0 +1,9 @@
+.layout-builder-widget [class*="button"] {
+  margin: 8px;
+  cursor: pointer;
+}
+
+.layout-builder-widget-divider {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}

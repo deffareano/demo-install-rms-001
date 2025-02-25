@@ -1,0 +1,48 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function rekod4sekolah_init_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+    #\Drupal::service('page_cache_kill_switch')->trigger(); # Drupal clear cache
+    $allowed_bundles = array ("unit_pengolah", "klasifikasi_keamanan", "format_media", "hak_akses", "nasib_akhir", "tahun_peraturan");
+    #print_r($entity->bundle());
+
+    if (in_array($entity->bundle(), $allowed_bundles)) {
+
+        if ($entity->getType() == 'unit_pengolah') {
+            #(new RedirectResponse(\Drupal::request()->getBaseUrl().'/masterfile/unit-pengolah'))->send();
+            #\Drupal::messenger()->addMessage("Tampilkan unit pengolah disini");
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+            #exit();
+        } elseif ($entity->getType() == 'klasifikasi_keamanan') {
+            #(new RedirectResponse(\Drupal::request()->getBaseUrl().'/masterfile/klasifikasi-keamanan'))->send();
+            #\Drupal::messenger()->addMessage("Tampilkan pesan disini");
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+            #exit();
+        } elseif ($entity->getType() == 'format_media') {
+            #(new RedirectResponse(\Drupal::request()->getBaseUrl().'/masterfile/format-media'))->send();
+            #\Drupal::messenger()->addMessage("Tampilkan pesan disini");
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+            #exit();
+        } elseif ($entity->getType() == 'hak_akses') {
+            #(new RedirectResponse(\Drupal::request()->getBaseUrl().'/masterfile/hak-akses'))->send();
+            #\Drupal::messenger()->addMessage("Tampilkan pesan disini");
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+            #exit();
+        } elseif ($entity->getType() == 'nasib_akhir') {
+            #(new RedirectResponse(\Drupal::request()->getBaseUrl().'/masterfile/nasib-akhir'))->send();
+            #\Drupal::messenger()->addMessage("Tampilkan pesan disini");
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+            #exit();
+        } elseif ($entity->getType() == 'tahun_peraturan') {
+            #(new RedirectResponse(\Drupal::request()->getBaseUrl().'/masterfile/tahun-peraturan'))->send();
+            #\Drupal::messenger()->addMessage("Tampilkan pesan disini");
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+            #exit();
+        }
+
+    }
+}
+

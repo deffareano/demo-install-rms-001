@@ -1,0 +1,22 @@
+{
+    "name": "drupal/layout_builder_widget",
+    "description": "Layout Builder Widget",
+    "type": "drupal-module",
+    "homepage": "https://www.drupal.org/project/layout_builder_widget",
+    "authors": [
+        {
+            "name": "Oleksandr Mokliak",
+            "homepage": "https://www.drupal.org/u/mokys",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://www.drupal.org/project/layout_builder_widget",
+        "source": "https://git.drupalcode.org/project/layout_builder_widget"
+    },
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "require": {
+        "drupal/core": "^9 || ^10"
+    }
+}

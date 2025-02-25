@@ -1,0 +1,15 @@
+# Schema for the configuration files of the "layout_builder_widget" module.
+
+field.widget.settings.layout_builder_widget:
+  type: mapping
+  label: 'Layout builder widget settings'
+  mapping:
+    discard_changes:
+      type: boolean
+      label: 'Discard changes'
+    revert_overrides:
+      type: boolean
+      label: 'Revert overrides'
+    toggle_content_preview:
+      type: boolean
+      label: 'Toggle content preview'

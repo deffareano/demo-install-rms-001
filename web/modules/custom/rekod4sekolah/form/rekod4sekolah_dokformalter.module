@@ -1,0 +1,42 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\node\Entity\Node;
+
+function rekod4sekolah_dokformalter_form_alter(&$form, &$form_state, $form_id) {
+    #dpm($form_id);
+}
+
+#############################
+### DOKUMEN #################
+function rekod4sekolah_dokformalter_form_node_dokumen_rekod_form_alter(&$form, &$form_state, $form_id) {
+    dpm($form['field_dok_berkas']['widget'][0]['target_id']['#default_value']);
+    if (isset($_GET['berkas'])) {
+        if (is_numeric($_GET['berkas'])) {
+            $_berkas_id = intval($_GET['berkas']);
+            $berkas = Node::load($_berkas_id);
+            $form['field_dok_berkas']['widget'][0]['target_id']['#default_value'] = $berkas;
+        } else {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+    } else {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    }
+    $form['field_dok_berkas']['#access'] = FALSE;
+
+    #\Drupal::messenger()->addMessage("Tampilkan dokumen disini");
+}
+
+function rekod4sekolah_formalter_form_node_dokumen_rekod_edit_form_alter(&$form, &$form_state, $form_id) {
+    $form['field_dok_berkas']['#access'] = FALSE;
+}
+
+function rekod4sekolah_formalter_form_node_dokumen_rekod_delete_form_alter(&$form, &$form_state, $form_id) {
+}
+
+
+
+#############################

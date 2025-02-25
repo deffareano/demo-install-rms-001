@@ -1,0 +1,4 @@
+layout_builder_widget.styles:
+  css:
+    theme:
+      css/layout_builder_widget.styles.css: {}

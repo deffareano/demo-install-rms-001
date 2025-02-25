@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function rekod4sekolah_nodeklaret_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+#    $variables['#cache']['max-age'] = 0;
+#    \Drupal::service('page_cache_kill_switch')->trigger(); # Drupal clear cache
+    $allowed_bundles = array ("klasifikasi_retensi");
+    #\Drupal::messenger()->addMessage('rekod4sekolah_nodeberkas_entity_view');
+    if (in_array($entity->bundle(), $allowed_bundles)) {
+        $title = $build['title'][0]['#context']['value'];
+        #$new_title = t('Informasi Klasifikasi & Retensi', ['@title' => $title]);
+        #$build['title'][0]['#context']['value'] = $new_title;
+    }
+}

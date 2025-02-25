@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * @file
+ * Provides hook implementations for the layout_builder_widget module.
+ */
+
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Plugin\Context\EntityContext;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\field\FieldStorageConfigInterface;
+use Drupal\layout_builder_widget\Plugin\SectionStorage\OverridesSectionStorage;
+use Drupal\layout_builder_widget\Plugin\Field\FieldWidget\LayoutBuilderWidget;
+
+/**
+ * Implements hook_help().
+ */
+function layout_builder_widget_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.layout_builder_widget':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Layout Builder widget') . '</p>';
+
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function layout_builder_widget_module_implements_alter(&$implementations, $hook) {
+  // By default, the Layout builder hides the layout field
+  // on the entity display form.
+  // Removing this hook from the list of hooks will display it again.
+  if ($hook === 'form_entity_form_display_edit_form_alter') {
+    unset($implementations['layout_builder']);
+  }
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function layout_builder_widget_field_widget_info_alter(array &$info) {
+  if (isset($info['layout_builder_widget'])) {
+    $info['layout_builder_widget']['class'] = LayoutBuilderWidget::class;
+    $info['layout_builder_widget']['provider'] = 'layout_builder_widget';
+  }
+}
+
+/**
+ * Implements hook_layout_builder_section_storage_alter().
+ */
+function layout_builder_widget_layout_builder_section_storage_alter(array &$definitions) {
+  $definitions['overrides']->setClass(OverridesSectionStorage::class);
+}
+
+/**
+ * Implements hook_entity_field_access_alter().
+ *
+ * @see \Drupal\layout_builder\Field\LayoutSectionItemList::defaultAccess()
+ */
+function layout_builder_widget_entity_field_access_alter(array &$grants, array $context) {
+  [$operation, $field_definition, $items, $account] = array_values($context);
+  // Override default access control from LayoutSectionItemList to allow
+  // access Layout Builder UI on entity edit form.
+  if ($items && $operation === 'edit' && $field_definition->getName() === OverridesSectionStorage::FIELD_NAME) {
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+    $entity = $items->getEntity();
+    /** @var \Drupal\layout_builder\Plugin\SectionStorage\OverridesSectionStorage $section_storage */
+    $section_storage = \Drupal::service('plugin.manager.layout_builder.section_storage')
+      ->load('overrides', ['entity' => EntityContext::fromEntity($entity)]);
+    // Delegate access control to the layout builder section storage.
+    /** @var \Drupal\Core\Access\AccessResultInterface $access */
+    $access = $section_storage->access($operation, $account, TRUE);
+
+    return $grants[':default'] = $access->inheritCacheability($grants[':default'])
+      ->addCacheableDependency($context['items']->getEntity());
+  }
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function layout_builder_widget_theme_registry_alter(&$theme_registry) {
+  // Remove the 'Warning: Layout Builder does not support translating layout'
+  // from admin/config/regional/content-language page.
+  if (!empty($theme_registry['language_content_settings_table']['preprocess functions'])) {
+    $preprocess_functions = &$theme_registry['language_content_settings_table']['preprocess functions'];
+    $index = array_search('layout_builder_preprocess_language_content_settings_table', $preprocess_functions, TRUE);
+    if ($index !== FALSE) {
+      unset($preprocess_functions[$index]);
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for 'field_storage_config'.
+ */
+function layout_builder_widget_field_storage_config_presave(FieldStorageConfigInterface $field_storage) {
+  if ($field_storage->getName() === OverridesSectionStorage::FIELD_NAME && $field_storage->getType() === 'layout_section') {
+    $field_storage->setTranslatable(TRUE);
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * Removes task of Layout Builder from an entity edit form.
+ */
+function layout_builder_widget_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface $cacheability) {
+  $route_match = \Drupal::routeMatch();
+
+  if (($route = $route_match->getRouteObject()) && ($parameters = $route->getOption('parameters'))) {
+    // Gets the entity from the route.
+    foreach ($parameters as $name => $options) {
+      if (isset($options['type']) && strpos($options['type'], 'entity:') === 0) {
+        $entity = $route_match->getParameter($name);
+        if ($entity instanceof ContentEntityInterface) {
+          $entity_form_display = \Drupal::service('entity_display.repository')
+            ->getFormDisplay($entity->getEntityTypeId(), $entity->bundle());
+
+          $layout_builder_ui_tab_route = "layout_builder_ui:layout_builder.overrides.{$entity->getEntityTypeId()}.view";
+          // Check if the field is enabled on entity edit form.
+          if (isset($data['tabs'][0][$layout_builder_ui_tab_route]) && $entity_form_display->getComponent(OverridesSectionStorage::FIELD_NAME)) {
+            unset($data['tabs'][0][$layout_builder_ui_tab_route]);
+          }
+
+          // When a layout_builder_widget is enabled or disabled on an
+          // entity edit form, it is necessary to invalidate the cache.
+          $cacheability->addCacheTags($entity_form_display->getCacheTags());
+        }
+      }
+    }
+  }
+}
