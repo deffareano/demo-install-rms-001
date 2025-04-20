@@ -1,0 +1,19 @@
+<?php
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function rekod4sekolah_nodedokumen_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+#    $variables['#cache']['max-age'] = 0;
+#    \Drupal::service('page_cache_kill_switch')->trigger(); # Drupal clear cache
+    #dpm($entity);
+    $allowed_bundles = array ("dokumen_rekod");
+    #\Drupal::messenger()->addMessage('rekod4sekolah_nodedokumen_entity_view');
+    if (in_array($entity->bundle(), $allowed_bundles)) {
+        $title = $build['title'][0]['#context']['value'];
+        $new_title = t('Informasi Dokumen', ['@title' => $title]);
+        $build['title'][0]['#context']['value'] = $new_title;
+    }
+}

@@ -1,0 +1,15 @@
+.form-group {
+	padding-left: 1px;
+	padding-right: 1px;
+	margin-top: 10px;
+}
+
+#edit-field-kla-retensi-aktif-wrapper label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+#edit-field-kla-retensi-inaktif-wrapper label {
+	display: block;
+	margin-bottom: 5px;
+}

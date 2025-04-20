@@ -16,6 +16,7 @@
     ],
     "require": {
         "composer/installers": "^2.0",
+        "drupal/asset_injector": "^2.21",
         "drupal/bef_select": "^2.0",
         "drupal/bootstrap": "^3.34",
         "drupal/core-composer-scaffold": "^10.4",

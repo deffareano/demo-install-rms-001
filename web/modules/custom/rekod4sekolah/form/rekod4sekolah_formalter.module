@@ -14,11 +14,11 @@ function rekod4sekolah_formalter_form_node_unit_pengolah_form_alter(&$form, &$fo
     #dpm($form);
     #\Drupal::messenger()->addMessage("Tampilkan unit pengolah disini");
     if (!isset($_GET['destination'])) {
-        #throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
         if ($_GET['destination'] != '/masterfile/unit-pengolah') {
             #die($_GET['destination']);
-        #    throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
 }
@@ -50,7 +50,7 @@ function rekod4sekolah_formalter_form_node_tahun_peraturan_form_alter(&$form, &$
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/tahun-peraturan') {
+        if ($_GET['destination'] != '/masterfile/tahun-peraturan') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -61,7 +61,7 @@ function rekod4sekolah_formalter_form_node_tahun_peraturan_edit_form_alter(&$for
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/tahun-peraturan') {
+        if ($_GET['destination'] != '/masterfile/tahun-peraturan') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -71,7 +71,7 @@ function rekod4sekolah_formalter_form_node_tahun_peraturan_delete_form_alter(&$f
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/tahun-peraturan') {
+        if ($_GET['destination'] != '/masterfile/tahun-peraturan') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -83,7 +83,7 @@ function rekod4sekolah_formalter_form_node_klasifikasi_keamanan_form_alter(&$for
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/klasifikasi-keamanan') {
+        if ($_GET['destination'] != '/masterfile/klasifikasi-keamanan') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -94,7 +94,7 @@ function rekod4sekolah_formalter_form_node_klasifikasi_keamanan_edit_form_alter(
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/klasifikasi-keamanan') {
+        if ($_GET['destination'] != '/masterfile/klasifikasi-keamanan') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -104,7 +104,7 @@ function rekod4sekolah_formalter_form_node_klasifikasi_keamanan_delete_form_alte
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/klasifikasi-keamanan') {
+        if ($_GET['destination'] != '/masterfile/klasifikasi-keamanan') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -116,7 +116,7 @@ function rekod4sekolah_formalter_form_node_format_media_form_alter(&$form, &$for
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/format-media') {
+        if ($_GET['destination'] != '/masterfile/format-media') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -127,7 +127,7 @@ function rekod4sekolah_formalter_form_node_format_media_edit_form_alter(&$form, 
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/format-media') {
+        if ($_GET['destination'] != '/masterfile/format-media') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -137,7 +137,7 @@ function rekod4sekolah_formalter_form_node_format_media_delete_form_alter(&$form
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/format-media') {
+        if ($_GET['destination'] != '/masterfile/format-media') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -149,7 +149,7 @@ function rekod4sekolah_formalter_form_node_hak_akses_form_alter(&$form, &$form_s
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/hak-akses') {
+        if ($_GET['destination'] != '/masterfile/hak-akses') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -160,7 +160,7 @@ function rekod4sekolah_formalter_form_node_hak_akses_edit_form_alter(&$form, &$f
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/hak-akses') {
+        if ($_GET['destination'] != '/masterfile/hak-akses') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -170,7 +170,7 @@ function rekod4sekolah_formalter_form_node_hak_akses_delete_form_alter(&$form, &
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/hak-akses') {
+        if ($_GET['destination'] != '/masterfile/hak-akses') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -182,7 +182,7 @@ function rekod4sekolah_formalter_form_node_nasib_akhir_form_alter(&$form, &$form
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/nasib-akhir') {
+        if ($_GET['destination'] != '/masterfile/nasib-akhir') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -193,7 +193,7 @@ function rekod4sekolah_formalter_form_node_nasib_akhir_edit_form_alter(&$form, &
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/nasib-akhir') {
+        if ($_GET['destination'] != '/masterfile/nasib-akhir') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -203,7 +203,7 @@ function rekod4sekolah_formalter_form_node_nasib_akhir_delete_form_alter(&$form,
     if (!isset($_GET['destination'])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     } else {
-        if ($_GET['destination'] != '/rekod4sekolah/masterfile/nasib-akhir') {
+        if ($_GET['destination'] != '/masterfile/nasib-akhir') {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -215,9 +215,12 @@ function rekod4sekolah_formalter_form_node_berkas_form_alter(&$form, &$form_stat
 #    #$form['field_bks_uraian']['widget'][0]['value']['#default_value'] = 'uraian disini';
 #    dpm($form['field_bks_tanggal_retensi']['#access']);
     $form['field_bks_tanggal_retensi']['#access'] = FALSE;
-
+    $form['field_bks_tgl_retensi_inaktif']['#access'] = FALSE;
     $form['field_bks_tanggal_retensi']['widget'][0]['value']['#default_value'] = new DrupalDateTime('2025-10-11 01:00:00', 'Asia/Jakarta');
-#    \Drupal::messenger()->addMessage("Tampilkan berkas disini");
+    $form['field_bks_tgl_retensi_inaktif']['widget'][0]['value']['#default_value'] = new DrupalDateTime('2025-10-11 01:00:00', 'Asia/Jakarta');
+    $form['field_bks_usulan_pemusnahan']['#access'] = FALSE;
+
+    #    \Drupal::messenger()->addMessage("Tampilkan berkas disini");
 }
 
 function rekod4sekolah_formalter_form_node_berkas_delete_form_alter(&$form, &$form_state, $form_id) {

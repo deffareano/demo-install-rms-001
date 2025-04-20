@@ -21,13 +21,25 @@ function rekod4sekolah_nodeberkas_node_presave($node) {
         $klasifikasi_node = $node->load($klasifikasi_id);
         #\Drupal::messenger()->addMessage('retensi Aktif: '.$klasifikasi_node->get("field_kla_retensi_aktif")->getString());
         #\Drupal::messenger()->addMessage('retensi Inaktif: '.$klasifikasi_node->get("field_kla_retensi_inaktif")->getString());
+        # $total_tahun = $klasifikasi_node->get("field_kla_retensi_aktif")->getString() + $klasifikasi_node->get("field_kla_retensi_inaktif")->getString(); // total_tahun sebelumnya
         $total_tahun = $klasifikasi_node->get("field_kla_retensi_aktif")->getString() + $klasifikasi_node->get("field_kla_retensi_inaktif")->getString();
+        $total_tahun_aktif = $klasifikasi_node->get("field_kla_retensi_aktif")->getString();
+        $total_tahun_inaktif = $klasifikasi_node->get("field_kla_retensi_inaktif")->getString();
+
         #\Drupal::messenger()->addMessage('Total Tahun: '.$total_tahun);
 
-        $tanggal_retensi = date_create($kurun_waktu);
-        $interval = date_interval_create_from_date_string($total_tahun.' years');
-        $tanggal_retensi->add($interval);
-        $node->set('field_bks_tanggal_retensi', $tanggal_retensi->format('Y-m-d')); // You need to save the $order_node 
+        $tanggal_retensi = date_create($kurun_waktu); // start date
+        $tanggal_retensi_aktif = date_create($kurun_waktu); // start date
+        $tanggal_retensi_inaktif = date_create($kurun_waktu); // start date
+        $interval = date_interval_create_from_date_string($total_tahun.' years'); // interval sebelumnya
+        $interval_aktif = date_interval_create_from_date_string($total_tahun_aktif.' years'); // interval sebelumnya
+        $interval_inaktif = date_interval_create_from_date_string($total_tahun_inaktif.' years'); // interval sebelumnya
+        $tanggal_retensi->add($interval); // sebelumnya
+        $tanggal_retensi_aktif->add($interval_aktif);
+        $tanggal_retensi_inaktif->add($interval_inaktif);
+        #$node->set('field_bks_tanggal_retensi', $tanggal_retensi->format('Y-m-d')); // You need to save the $order_node
+        $node->set('field_bks_tanggal_retensi', $tanggal_retensi_aktif->format('Y-m-d')); // You need to save the $order_node
+        $node->set('field_bks_tgl_retensi_inaktif', $tanggal_retensi_inaktif->format('Y-m-d')); // You need to save the $order_node
     }
 }
 
@@ -39,7 +51,7 @@ function rekod4sekolah_nodeberkas_entity_view(array &$build, \Drupal\Core\Entity
     #\Drupal::messenger()->addMessage('rekod4sekolah_nodeberkas_entity_view');
     if (in_array($entity->bundle(), $allowed_bundles)) {
         $title = $build['title'][0]['#context']['value'];
-        $new_title = t('Informasi Berkas dan Dokumen', ['@title' => $title]);
+        $new_title = t('Informasi Berkas dan Daftar Isi', ['@title' => $title]);
         $build['title'][0]['#context']['value'] = $new_title;
     }
 }

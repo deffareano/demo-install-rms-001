@@ -1,0 +1,17 @@
+.block-field-blocknodeklasifikasi-retensititle h2 {
+  font-weight: bold;
+  font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+  font-size: 15px;
+  line-height: 1.42857143;
+  color: #333333;
+  margin-bottom: 5px;
+  margin-top: 0px;
+}
+
+.klasifikasi-retensi .block-layout-builder {
+	margin-top: 15px;
+}
+
+.klasifikasi-retensi .block-layout-builder .field--label {
+	margin-bottom: 5px;
+}

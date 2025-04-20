@@ -1,0 +1,22 @@
+#edit-field-dok-jumlah-wrapper label {
+	display:block;
+	margin-bottom: 5px;
+}
+
+.block-field-blocknodedokumen-rekodtitle h2 {
+  font-weight: bold;
+  font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+  font-size: 15px;
+  line-height: 1.42857143;
+  color: #333333;
+  margin-bottom: 5px;
+  margin-top: 0px;
+}
+
+.dokumen-rekod .block-layout-builder {
+	margin-top: 15px;
+}
+
+.dokumen-rekod .block-layout-builder .field--label {
+	margin-bottom: 5px;
+}
